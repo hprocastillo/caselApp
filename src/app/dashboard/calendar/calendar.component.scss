@@ -1,0 +1,57 @@
+.calendar {
+  text-align: center;
+  width: 100%;
+}
+
+.header {
+  display: inline-block;
+  width: 100%;
+}
+
+.month {
+  display: inline;
+  font-weight: bold;
+}
+
+.btn-prev {
+  float: left;
+  padding: 2px 5px 2px 5px;
+}
+
+.btn-next {
+  float: right;
+  padding: 2px 5px 2px 5px;
+}
+
+ol {
+  //border: 1px solid #d9d9d9;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.heading-days {
+  background-color: #eee;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.list-days {
+    font-size: 12px;
+  padding: 10px;
+}
+
+.list-days:hover {
+  background-color: #cfe0e3;
+  cursor: pointer;
+}
+
+.today {
+  font-size: 12px;
+  font-weight: bold;
+  color: #1e5a82;
+  border-radius: 50%;
+  border: 2px solid #1e5a82;
+  padding: 5px 8px;
+}

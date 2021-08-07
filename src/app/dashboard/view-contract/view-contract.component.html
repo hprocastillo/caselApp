@@ -1,0 +1,179 @@
+<ng-container *ngFor="let c of contract">
+
+  <div class="row">
+    <!-- Contract Data -->
+    <div class="col-12 col-lg-8 mb-2">
+      <div class="card">
+        <div class="card-header">
+          <app-contract-type-by-id [contractTypeId]="c.contractTypeId"></app-contract-type-by-id>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <!-- Customer -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Cliente:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    <app-customer-by-id [customerId]="c.customerId"></app-customer-by-id>
+                  </div>
+                </div>
+              </div>
+
+
+            </li>
+            <!-- Contract code -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Código:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    {{c.code}}
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Contract type -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Tipo de contrato:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    <app-contract-type-by-id [contractTypeId]="c.contractTypeId"></app-contract-type-by-id>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Supplier -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Proveedor:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    <app-supplier-by-id [supplierId]="c.supplierId" [show]="'name'"></app-supplier-by-id>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Contract goal -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Objeto del contrato:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    <app-contract-goal-by-id [contractGoalId]="c.contractGoalId"></app-contract-goal-by-id>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Contract agreed Payment -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Contraprestación:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    {{c.agreedPayment}}
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Contract observations -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Observaciones:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    {{c.observations}}
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Contract date start -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Fecha inicio:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    {{c.dateStart.toDate() | date:'medium'}}
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!-- Contract date end -->
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-12 col-lg-4">
+                  <div class="label">
+                    <p>Fecha fin:</p>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-8">
+                  <div class="data">
+                    {{c.dateEnd.toDate() | date:'medium'}}
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Attachments docs   -->
+    <div class="col-12 col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          DOCUMENTOS ADJUNTOS
+        </div>
+        <div class="card-body">
+
+          <ng-container *ngIf="c.attachments === true; else noAttachments">
+            <app-files-attachments [codeContract]="c.code"></app-files-attachments>
+          </ng-container>
+
+          <ng-template #noAttachments>
+            <p><em> No hay documentos adjuntos</em></p>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+

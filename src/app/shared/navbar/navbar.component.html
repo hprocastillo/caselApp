@@ -1,0 +1,56 @@
+<ng-container *ngIf="authSvc.user$ | async as user">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="'dashboard'">CaselApp</a>
+
+      <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        &#9776;
+      </button>
+
+      <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-dark" [routerLink]="'dashboard'">Inicio</button>
+          </div>
+
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-dark" id="dropdown1" ngbDropdownToggle>
+              Mantenimiento
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdown1">
+              <button ngbDropdownItem [routerLink]="'management/customers'" (click)="isMenuCollapsed = true">Clientes
+              </button>
+              <button ngbDropdownItem [routerLink]="'management/suppliers'" (click)="isMenuCollapsed = true">
+                Proveedores
+              </button>
+              <button ngbDropdownItem [routerLink]="'management/contracts'" (click)="isMenuCollapsed = true">Contratos
+              </button>
+              <button ngbDropdownItem [routerLink]="'management/contractGoals'" (click)="isMenuCollapsed = true">Objeto
+                de Contrato
+              </button>
+              <button ngbDropdownItem [routerLink]="'management/contractTypes'" (click)="isMenuCollapsed = true">Tipos
+                de Contrato
+              </button>
+            </div>
+          </div>
+
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-dark" id="dropdown2" ngbDropdownToggle>
+              {{user.displayName}}
+              <img src="{{user.photoURL}}" alt="{{user.displayName}}" class="img-avatar">
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdown2">
+              <button ngbDropdownItem [routerLink]="'login/profile'" (click)="isMenuCollapsed = true">Perfil</button>
+              <button ngbDropdownItem (click)="logout()">Cerrar sesión</button>
+            </div>
+          </div>
+
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+</ng-container>

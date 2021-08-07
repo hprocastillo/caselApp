@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "caselapp-b768c": {
+      "hosting": {
+        "caselApp": [
+          "caselapp-b768c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "caselapp-b768c"
+  }
+}

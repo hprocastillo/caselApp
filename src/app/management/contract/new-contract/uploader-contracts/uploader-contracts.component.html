@@ -1,0 +1,18 @@
+<div class="dropzone"
+     appDropzoneContract
+     (hovered)="toggleHover($event)"
+     (dropped)="onDrop($event)"
+     [class.hovering]="isHovering">
+  <h5 class="text-center">Arrastre y suelte sus archivos aquí!</h5>
+</div>
+
+<ng-container *ngIf="files.length > 0">
+  <h6 class="mt-4">Archivos subidos</h6>
+  <ul class="mt-4">
+    <li *ngFor="let file of files; let i = index">
+      <app-upload-contract [file]="file" [index]="i" [codeContract]="codeContract" [user]="user"></app-upload-contract>
+    </li>
+  </ul>
+</ng-container>
+
+

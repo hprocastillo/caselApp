@@ -1,0 +1,9 @@
+<ng-container *ngIf="files">
+
+  <ul>
+    <li *ngFor="let file of files">
+      <app-format-file [filePath]="file.path.toUpperCase()" [downloadURL]="file.downloadURL"></app-format-file>
+    </li>
+  </ul>
+
+</ng-container>

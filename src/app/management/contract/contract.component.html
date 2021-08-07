@@ -1,0 +1,76 @@
+<ng-container *ngIf="authSvc.user$ | async as user">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body d-flex justify-content-start">
+
+          <!-- Show List -->
+          <ng-container *ngIf="showList === true">
+            <!-- Header -->
+            <h5 class="mr-4">Lista de Contratos</h5>
+            <!-- Bar Buttons -->
+            <button type="button" class="btn btn-primary btn-sm mr-2" (click)="showFormNewContract()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                   viewBox="0 0 16 16">
+                <path
+                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+              </svg>
+              Nuevo
+            </button>
+            <button type="button" class="btn btn-success btn-sm mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                   class="bi bi-file-earmark-excel-fill" viewBox="0 0 16 16">
+                <path
+                  d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.884 6.68 8 9.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 10l2.233 2.68a.5.5 0 0 1-.768.64L8 10.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 10 5.116 7.32a.5.5 0 1 1 .768-.64z"/>
+              </svg>
+              Exportar
+            </button>
+            <select id="" class="form-control filter" (change)="selectCustomer($event.target)">
+              <option value="ALL">Mostrar Todos</option>
+              <option *ngFor="let customer of listCustomers" value="{{customer.id}}">{{customer.name}}</option>
+            </select>
+          </ng-container>
+
+          <!-- Show Form New Contract -->
+          <ng-container *ngIf="showForm === true">
+            <!-- Header -->
+            <h5 class="mr-4">Nuevo Contrato</h5>
+            <!-- Bar Buttons -->
+            <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="showListContract()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+                   viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+              </svg>
+              Lista
+            </button>
+          </ng-container>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <!-- Form New Contract -->
+  <ng-container *ngIf="showForm === true">
+    <div class="row">
+      <div class="col-12">
+        <app-new-contract [user]="user" (showForm)="getShowForm($event)"></app-new-contract>
+      </div>
+    </div>
+  </ng-container>
+
+
+  <!-- List Contracts -->
+  <ng-container *ngIf="showList === true">
+    <div class="row">
+      <div class="col-12">
+        <app-list-contracts [user]="user" [filter]="filter"></app-list-contracts>
+      </div>
+    </div>
+  </ng-container>
+
+</ng-container>

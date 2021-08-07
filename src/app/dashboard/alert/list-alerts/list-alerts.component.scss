@@ -1,0 +1,34 @@
+ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+
+li {
+  text-align: center;
+  margin: 0 0 5px 0;
+  padding: 0;
+  display: flex;
+}
+
+.label, .info {
+  text-align: start;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+.label {
+  width: 25%;
+  font-weight: bold;
+}
+
+.info {
+  width: 60%;
+}
+
+.btn-trigger {
+  padding: 0;
+  font-size: 10px;
+}

@@ -1,0 +1,120 @@
+<form [formGroup]="newFormContract"
+      (ngSubmit)="onSave(user.uid, user.displayName, user.email, user.photoURL)">
+
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="customerId">Cliente</label>
+            <select id="customerId" class="form-control" (change)="getCustomer($event.target)">
+              <option selected>Seleccionar</option>
+              <option *ngFor="let customer of listCustomers" value="{{customer.id}}">{{customer.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="code">Código</label>
+            <input type="text" class="form-control" id="code" placeholder="Ejemplo: 01-015-2021-CG-CMM"
+                   required="required" (change)="getCodeContract($event.target)" autofocus>
+          </div>
+
+          <div class="form-group">
+            <label for="typeContract">Tipo de contrato</label>
+            <select id="typeContract" class="form-control" (change)="getTypeContract($event.target)">
+              <option selected>Seleccionar</option>
+              <option *ngFor="let typeContract of listTypeContracts"
+                      value="{{typeContract.id}}">{{typeContract.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="supplierId">Proveedor</label>
+            <select id="supplierId" class="form-control" (change)="getSupplier($event.target)">
+              <option selected>Seleccionar</option>
+              <option *ngFor="let supplier of listSuppliers" value="{{supplier.id}}">{{supplier.name}}</option>
+            </select>
+          </div>
+
+          <ng-container *ngIf="supplierSelected.length > 0; else noSupplierSelected">
+            <div class="form-group">
+              <label for="ruc">RUC</label>
+              <ul>
+                <li *ngFor="let supplier of supplierSelected">
+                  <input type="text" id="ruc" class="form-control" value="{{supplier.ruc}}" disabled>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+
+          <ng-template #noSupplierSelected>
+            <div class="form-group">
+              <label for="rucNoSelected">RUC</label>
+              <input type="text" id="rucNoSelected" class="form-control" value="" disabled>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="form-group">
+            <label for="reasonId">Objeto del contrato</label>
+            <select id="reasonId" class="form-control" (change)="getContractGoal($event.target)">
+              <option selected>Seleccionar</option>
+              <option *ngFor="let goal of listContractGoals" value="{{goal.id}}">{{goal.description}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="agreedPayment">Contraprestación</label>
+            <input type="text" class="form-control" id="agreedPayment" placeholder="Ejem: S/ 180.00 SOLES  X DIA"
+                   formControlName="agreedPayment">
+          </div>
+
+          <div class="form-group">
+            <label for="observations">Observaciones</label>
+            <textarea class="form-control" id="observations" rows="2" formControlName="observations"
+                      placeholder="Ejem: VIGENTE"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dateStart">Fecha de inicio</label>
+            <input type="date" class="form-control" id="dateStart" (change)="getDateStart($event.target)">
+          </div>
+
+          <div class="form-group">
+            <label for="dateEnd">Fecha de fin</label>
+            <input type="date" class="form-control" id="dateEnd" (change)="getDateEnd($event.target)">
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="attachments" (change)="getAttachment($event.target)">
+            <label class="form-check-label" for="attachments">Adjuntar Archivo</label>
+          </div>
+
+          <ng-container *ngIf="attachment === true">
+            <app-uploader-contracts [codeContract]="codeContract" [user]="user"></app-uploader-contracts>
+          </ng-container>
+
+          <button type="submit" class="btn btn-block btn-primary">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

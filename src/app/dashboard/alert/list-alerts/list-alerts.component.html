@@ -1,0 +1,44 @@
+<ul>
+  <li *ngFor="let alert of listAlerts">
+    <app-alert [dateTimeAlert]="alert.dateTimeAlert.toDate()" (limitDays)="getLimitDays($event)"></app-alert>
+
+    <!-- Modal -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">{{alert.nameAlert}}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li>
+            <div class="label">Fecha y Hora:</div>
+            <div class="info">{{alert.dateTimeAlert.toDate() | date:'mediumDate'}} {{alert.dateTimeAlert.toDate() | date:'shortTime'}}</div>
+          </li>
+          <li>
+            <div class="label">Contrato:</div>
+            <div class="info">
+              <a [routerLink]="'viewContract/' + alert.contractCode" target="_blank">Ver</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+
+<!--     Buttons trigger modal-->
+<!--     If hearing is coming tomorrow or more, paint green-->
+    <ng-container *ngIf="limitDays > 30">
+      <button type="button" class="btn btn-sm btn-success btn-block btn-trigger" (click)="open(content)" placement="top" ngbTooltip="{{alert.nameAlert}}">
+        {{alert.timeAlert}}
+      </button>
+    </ng-container>
+
+    <!-- If hearing is past, paint red -->
+    <ng-container *ngIf="limitDays <= 30">
+      <button type="button" class="btn btn-sm btn-danger btn-block btn-trigger" (click)="open(content)" placement="top" ngbTooltip="{{alert.nameAlert}}">
+        {{alert.timeAlert}}
+      </button>
+    </ng-container>
+  </li>
+</ul>

@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-body">
+
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Código</th>
+          <th scope="col">Proveedor</th>
+          <th scope="col">RUC</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Objeto del contrato</th>
+          <th scope="col">Contraprestación</th>
+          <th scope="col">Fecha Inicio</th>
+          <th scope="col">Fecha Fin</th>
+          <th scope="col">Observaciones</th>
+          <th scope="col">Anexos - Adjuntos</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contract of listContracts; let i = index">
+          <!-- Index -->
+          <th scope="row">{{i + 1}}</th>
+          <!-- Customer -->
+          <td>
+            <app-customer-by-id [customerId]="contract.customerId"></app-customer-by-id>
+          </td>
+          <!-- Code -->
+          <td>{{contract.code}}</td>
+          <!-- Supplier name -->
+          <td>
+            <app-supplier-by-id [supplierId]="contract.supplierId" [show]="'name'"></app-supplier-by-id>
+          </td>
+          <!-- Supplier ruc -->
+          <td>
+            <app-supplier-by-id [supplierId]="contract.supplierId" [show]="'ruc'"></app-supplier-by-id>
+          </td>
+          <!-- Type contract -->
+          <td>
+            <app-contract-type-by-id [contractTypeId]="contract.contractTypeId"></app-contract-type-by-id>
+          </td>
+          <!-- Reason contract -->
+          <td>
+            <app-contract-goal-by-id [contractGoalId]="contract .contractGoalId"></app-contract-goal-by-id>
+          </td>
+          <!-- Agreed Payment -->
+          <td>{{contract.agreedPayment}}</td>
+
+          <!-- Date Start -->
+          <td>{{contract.dateStart.toDate() | date:'mediumDate'}}</td>
+
+          <!-- Date End -->
+          <td>{{contract.dateEnd.toDate() | date:'mediumDate'}}</td>
+
+          <!-- Observations Contract -->
+          <td>{{contract.observations}}</td>
+          <td>
+            <ng-container *ngIf="contract.attachments === true; else noAttachment">
+              <app-files-attachments [codeContract]="contract.code"></app-files-attachments>
+            </ng-container>
+            <ng-template #noAttachment>No hay documentos adjuntos</ng-template>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>

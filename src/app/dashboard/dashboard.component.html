@@ -1,0 +1,22 @@
+<ng-container *ngIf="authSvc.user$ | async as user">
+  <div class="row">
+    <div class="col-12">
+      <button (click)="requestPermission()">
+        Activar Notificaciones
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Form new Alert -->
+    <div class="col-12 col-sm-5 col-lg-4">
+      <app-new-alert [user]="user"></app-new-alert>
+    </div>
+
+    <!-- Calendar -->
+    <div class="col-12 col-sm-7 col-lg-8">
+      <app-calendar [user]="user" [token]="token"></app-calendar>
+    </div>
+  </div>
+
+</ng-container>
